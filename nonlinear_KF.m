@@ -105,10 +105,58 @@ for k=1:iteration
     SigXstore2(k,:) = SigX2(:);
 end
 
+%% Unscented Kalman Filter
+nxa = 3;
+alp = 0.2;
+kepa = 3-nxa;
+beta = 2;
+lambda = alp^2*(nxa+kepa)-nxa;
+alpham1 = lambda/(nxa+lambda);
+alphamk = 1/(2*(nxa+lambda));
+alphac1 = lambda/(nxa+lambda)+(1-alp^2+beta);
+alphack = 1/(2*(nxa+lambda));
+alpha_mean = [alpham1 alphamk(:,ones(1,2*Nxa))]';
+alpha_cov = [alphac1 alphack(:,ones(1,2*nxa))]';
+xhat3 = 2;
+SigX3 = 1;
+
+xhatstore3 = zeros(iteration,length(xhat3));
+SigXstore3 = zeros(iteration,length(xhat3)^2);
+
+for k=1:iteration
+    
+    % Prediction - Obtain Sigma Points
+    xhat_aug = [xhat3;0;0];
+    Sig_aug = blkdiag(SigX3,Sig_w,Sig_v);
+    sqr_Sig_aug=chol(Sig_aug,'lower');
+    X = xhat_aug(:,ones([1 2*nxa+1]))+sqrt(nxa+lambda)*[zeros(nxa,1), sqr_Sig_aug,-sqr_Sig_aug];
+    % Prediction - xhat, zhat
+    X_x = (4+X(1,:)).^(1/3)+X(2,:)+2*ustore(1,k);
+    xhat3 = X_x*alpha_mean;
+    square_X = (X_x(:,2:end) - xhat3(:,ones(1,2*nxa)))*sqrt(alphack);
+    square_X1 =X_x(:,1)-xhat3;
+    SigX3 = square_X*square_X'+alphac1*square_X1*square_X1;
+    Z = X_x.^3+3*X(3,:);
+    zhat3 = Z*alpha_mean;
+
+    % Correction
+    square_Z = (Z(:,2:end)-zhat3*ones(1,2*nxa))*sqrt(alphack);
+    square_Z1 = Z(:,1)-zhat3;
+    SigZ = square_Z*square_Z'+alphac1*square_Z1*square_Z1';
+    SigXZ = square_X*square_Z'+alphac1*square_X1*square_Z1';
+    L_unscent = SigXZ/SigZ;
+
+    xhat3 = xhat3+L_unscent*(zstore(1,k)-zhat3);
+    SigX3 = SigX3-L_unscent*SigZ*L_unscent';
+
+    xhatstore3(k,:) = xhat3;
+    SigXstore3(k,:) = SigX3(:);
+end
+
 %% Plot
 figure(1)
 
-subplot(2,1,1)
+subplot(3,1,1)
 hold on
 plot(0:iteration-1,xstore(1:iteration)','k-')
 plot(0:iteration-1,xhatstore','r-')
@@ -120,7 +168,7 @@ title("Extended Kalman Filter")
 ylim([-2,13])
 hold off
 
-subplot(2,1,2)
+subplot(3,1,2)
 hold on
 plot(0:iteration-1,xstore(1:iteration)','k-')
 plot(0:iteration-1,xhatstore2','r-')
@@ -130,4 +178,16 @@ grid on
 legend('true x','estimate x (CDKF)','error bounds')
 ylim([-2,13])
 title("Central Difference Kalman Filter")
+hold off
+
+subplot(3,1,3)
+hold on
+plot(0:iteration-1,xstore(1:iteration)','k-')
+plot(0:iteration-1,xhatstore3','r-')
+plot(0:iteration-1,xhatstore3'+3*sqrt(SigXstore3'), 'b--', ...
+    0:iteration-1,xhatstore3'-3*sqrt(SigXstore3'), 'b--')
+grid on
+legend('true x','estimate x (UKF)','error bounds')
+ylim([-2,13])
+title("Unscented Kalman Filter")
 hold off
