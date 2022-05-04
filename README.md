@@ -17,6 +17,15 @@ EKF uses Taylor series to linearize the system equation.
 
 
 
+## Final Result (Comparing EKF, CDKF, and UKF)
+<p align="center">
+  <img 
+    width="700"
+    src="images/nonlinear_KF.png"
+  >
+</p>
+
+
 Code Progress: ![100%](https://progress-bar.dev/100)
 
-Readme Progress: ![20%](https://progress-bar.dev/0)
+Readme Progress: ![20%](https://progress-bar.dev/20)
