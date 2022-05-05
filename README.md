@@ -12,9 +12,14 @@ EKF uses Taylor series to linearize the system equation.
 <img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\hat{z}_k=\mathbb{E}[h_k(x_k,u_k,v_k|\mathbb{Z}_{k-1})]\simeq&space;h_k(\hat{x}_k^-,u_k,\bar{v}_k)}">
 
 #### Correction Step:
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\tilde{z}_k=z_k-\hat{z}_k=h_k(x_k,u_k,v_k)-h_k(\hat{x}_k^-,u_k,\bar{v}_k)}">
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\hat{z}_k=h_k(x_k,u_k,v_k)&plus;\hat{C}_k(x_k-\hat{x}_k^-)&plus;\hat{D}_k(v_k-\bar{v}_k)}">
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\hat{C}_k=\frac{dh_k(x_k,u_k,v_k)}{dx_k}|_{x_k=\hat{x}_k^-},\&space;\hat{D}_k=\frac{dh_k(x_k,u_k,v_k)}{dv_k}|_{v_k=\bar{v}_k}}">
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}L_k=\Sigma_{\tilde{x}\tilde{z},k}^-\Sigma_{\tilde{z},k}^{-1}\simeq\Sigma_{\tilde{x},k}^-\hat{C}_k^T[\hat{C}_k\Sigma_{\tilde{x},k}^-\hat{C_k}^T&plus;\hat{D}_k\Sigma_{\tilde{v}}\hat{D}_k^T]^{-1}}">
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\hat{x}_k^&plus;=\hat{x}_k^-&plus;L_k(z_k-\hat{z}_k)}">
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\Sigma_{\tilde{x},k}^&plus;=\Sigma_{\tilde{x},k}^--L_k\Sigma_{\tilde{z},k}L_k^T}">
 
-
-
+## 2. Central Difference Kalman Filter
 
 
 ## Final Result (Comparing EKF, CDKF, and UKF)
@@ -28,4 +33,4 @@ EKF uses Taylor series to linearize the system equation.
 
 Code Progress: ![100%](https://progress-bar.dev/100)
 
-Readme Progress: ![20%](https://progress-bar.dev/20)
+Readme Progress: ![33%](https://progress-bar.dev/33)
