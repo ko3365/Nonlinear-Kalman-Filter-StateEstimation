@@ -20,8 +20,9 @@ EKF uses Taylor series to linearize the system equation.
 <img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\Sigma_{\tilde{x},k}^&plus;=\Sigma_{\tilde{x},k}^--L_k\Sigma_{\tilde{z},k}L_k^T}">
 
 ## 2. Central Difference Kalman Filter
+Given mean and covariance, create 2 more input points that are located gamma standard deviation away from the mean.
 
-
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\mathcal{X}=\{\bar{x},\bar{x}&plus;\gamma\sqrt{\Sigma_{\bar{x}}},\bar{x}-\gamma\sqrt{\Sigma_{\bar{x}}}\}}">
 ## Final Result (Comparing EKF, CDKF, and UKF)
 <p align="center">
   <img 
