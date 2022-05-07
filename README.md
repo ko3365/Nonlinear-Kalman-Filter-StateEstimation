@@ -19,10 +19,19 @@ EKF uses Taylor series to linearize the system equation.
 <img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\hat{x}_k^&plus;=\hat{x}_k^-&plus;L_k(z_k-\hat{z}_k)}">
 <img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\Sigma_{\tilde{x},k}^&plus;=\Sigma_{\tilde{x},k}^--L_k\Sigma_{\tilde{z},k}L_k^T}">
 
-## 2. Central Difference Kalman Filter
+## 2&3. Central Difference Kalman Filter(CDKF) and Unscented Kalman Filter (UKF)
 Given mean and covariance, create 2 more input points that are located gamma standard deviation away from the mean.
 
 <img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\mathcal{X}=\{\bar{x},\bar{x}&plus;\gamma\sqrt{\Sigma_{\bar{x}}},\bar{x}-\gamma\sqrt{\Sigma_{\bar{x}}}\}}">
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\bar{x}=\sum_{i=0}^p\alpha_{i}^{(m)}\mathcal{X}_i,\&space;\Sigma_{\bar{x}}=\sum_{i=0}^p\alpha_{i}^{(c)}(\mathcal{X}_i-\bar{x})(\mathcal{X}_i-\bar{x})^T}">
+with tuning parameters shown in table below:
+<p>
+  <img 
+    width="500"
+    src="images/parameters.PNG"
+  >
+</p>
+
 ## Final Result (Comparing EKF, CDKF, and UKF)
 <p align="center">
   <img 
@@ -31,7 +40,9 @@ Given mean and covariance, create 2 more input points that are located gamma sta
   >
 </p>
 
+## Reference
+[1] Eric A. Wan, Rudolph van der Merwe. The Unscented Kalman Filter for Nonlinear Estimation. Oregon Graduate Institute of Science & Technology, Feb 2000
 
 Code Progress: ![100%](https://progress-bar.dev/100)
 
-Readme Progress: ![33%](https://progress-bar.dev/33)
+Readme Progress: ![33%](https://progress-bar.dev/50)
