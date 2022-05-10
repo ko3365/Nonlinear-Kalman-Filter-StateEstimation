@@ -32,6 +32,18 @@ with tuning parameters shown in table below:
   >
 </p>
 
+#### Preparation:
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\hat{x}^{a,&plus;}_{k-1}=\begin{bmatrix}\hat{x}^&plus;_{k-1}\\\bar{w}\\\bar{v}\end{bmatrix},\Sigma^{a,&plus;}_{\bar{x},k-1}=\text{diag}(\Sigma_{\tilde{x},k-1}^{&plus;},\Sigma_{\tilde{w}},\Sigma_{\tilde{v}})}&space;">
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\mathcal{X}^{a,&plus;}_{k-1}=\{\hat{x}^{a,&plus;}_{k-1},\hat{x}^{a,&plus;}_{k-1}&plus;\gamma\sqrt{\Sigma^{a,&plus;}_{\bar{x},k-1}},\hat{x}^{a,&plus;}_{k-1}-\gamma\sqrt{\Sigma^{a,&plus;}_{\bar{x},k-1}}\}}">
+
+#### Prediction:
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\mathcal{X}^{x,-}_{k,i}=f_{k-1}(\mathcal{X}^{x,&plus;}_{k-1,i},u_{k-1},\mathcal{X}^{w,&plus;}_{k-1,i}),\hat{x}_k^-\simeq\sum^p_{i=0}\alpha_i^{(m)}\mathcal{X}^{x,-}_{k,i}}&space;">
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\Sigma^-_{\tilde{x},k}=\sum^p_{i=0}\alpha_i^{(c)}(\mathcal{X}^{x,-}_{k,i}-\hat{x}^-_k)(\mathcal{X}^{x,-}_{k,i}-\hat{x}^-_k)^T}&space;">
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\mathcal{Z}_{k,i}=h_k(\mathcal{X}^{x,-}_{k,i},u_k,\mathcal{X}^{v}_{k,i}),&space;\hat{z}=\sum_{i=0}^p\alpha_i^{(m)}\mathcal{Z}_{k,i}}&space;">
+
+#### Correction:
+
+
 ## Final Result (Comparing EKF, CDKF, and UKF)
 <p align="center">
   <img 
