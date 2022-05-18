@@ -42,6 +42,11 @@ with tuning parameters shown in table below:
 <img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\mathcal{Z}_{k,i}=h_k(\mathcal{X}^{x,-}_{k,i},u_k,\mathcal{X}^{v}_{k,i}),&space;\hat{z}=\sum_{i=0}^p\alpha_i^{(m)}\mathcal{Z}_{k,i}}&space;">
 
 #### Correction:
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\Sigma_{\tilde{z},k}=\sum_{i=0}^p{\alpha_i^{(c)}(\mathcal{Z}_{k,i}-\hat{z}_k)(\mathcal{Z}_{k,i}-\hat{z}_k)^T}}">
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\Sigma_{\tilde{x}\tilde{z},k}^-=\sum_{i=0}^p{\alpha_i^{(c)}(\mathcal{X}_{k,i}^{x,-}-\hat{x}_k^-)(\mathcal{Z}_{k,i}-\hat{z}_k)^T}}">
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}L_k=\Sigma_{\tilde{x}\tilde{z},k}^-\Sigma_{\tilde{z},k}^{-1}}">
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\hat{x}_k^&plus;=\hat{x}_k^-&plus;L_k(z_k-\hat{z}_k)}">
+<img src="https://latex.codecogs.com/svg.image?\large&space;{\color{Gray}\Sigma_{\tilde{x},k}^&plus;=\Sigma_{\tilde{x},k}^--L_k\Sigma_{\tilde{z},k}L_k^T}">
 
 
 ## Final Result (Comparing EKF, CDKF, and UKF)
@@ -55,6 +60,3 @@ with tuning parameters shown in table below:
 ## Reference
 [1] Eric A. Wan, Rudolph van der Merwe. The Unscented Kalman Filter for Nonlinear Estimation. Oregon Graduate Institute of Science & Technology, Feb 2000
 
-Code Progress: ![100%](https://progress-bar.dev/100)
-
-Readme Progress: ![33%](https://progress-bar.dev/50)
